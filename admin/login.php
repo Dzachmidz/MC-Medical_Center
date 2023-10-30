@@ -52,7 +52,7 @@
 		width: 100%;
 		height: 100%;
 		display: flex;
-		background-image: url("../assets/img/admin.jpg");
+		background-image: url("../assets/img/admin.png");
 		background-repeat: no-repeat;
 		background-attachment: fixed;
 		background-position: center;
@@ -65,9 +65,9 @@
 
 	.back-to-home {
 		position: absolute;
-		top: 10px;
+		top: 455px;
 		/* Jarak dari atas */
-		left: 10px;
+		left: 957px;
 		/* Jarak dari kanan */
 		
 	}

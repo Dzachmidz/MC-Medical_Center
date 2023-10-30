@@ -287,12 +287,19 @@ nav {
   padding-top: 83px;
   height: 100%;
   min-height: 100vh;
+  display: flex;
   align-items: center;
 }
 
-.home-wrapper .col-left p {
-  width: 450px;
+.col-left {
+  text-align: center; /* Menengahkan teks secara horizontal */
 }
+
+.home-wrapper .col-left h3,h1 {
+  width: 1090px;
+  margin: 0 auto; /* Menengahkan teks paragraf secara horizontal */
+}
+
 
 /* menu section */
 

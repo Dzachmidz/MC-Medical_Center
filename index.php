@@ -16,7 +16,8 @@ foreach ($query as $key => $value) {
   header.masthead {
     background: url(assets/img/<?php echo $_SESSION['setting_cover_img'] ?>);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: flex;
+    background-position: 315px;
   }
 </style>
 
@@ -28,29 +29,36 @@ foreach ($query as $key => $value) {
   </div>
   <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
+      <img src="./assets/img/logobc.png" alt="" style="max-width: 100px; max-height: 100px;">
       <a class="navbar-brand js-scroll-trigger" href="./">
         <?php echo $_SESSION['setting_name'] ?>
       </a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-        aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
-          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=home">Home</a></li>
-          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=cart_list"><span> <span
-                  class="badge badge-danger item_count">0</span> <i class="fa fa-shopping-cart"></i>
+          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=cart_list"><span> <span class="badge badge-danger item_count">0</span> <i class="fa fa-shopping-cart"></i>
               </span>Cart</a></li>
+          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=home">Home</a></li>
+          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=product">Product</a></li>
           <li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php?page=about">About Us</a></li>
-          <?php if (isset($_SESSION['login_user_id'])): ?>
+          <?php if (isset($_SESSION['login_user_id'])) : ?>
             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="admin/ajax.php?action=logout2">
-                <?php echo "Welcome " . $_SESSION['login_first_name'] . ' ' . $_SESSION['login_last_name'] ?> <i
-                  class="fa fa-power-off"></i>
+                <?php echo "Welcome " . $_SESSION['login_first_name'] . ' ' . $_SESSION['login_last_name'] ?> <i class="fa fa-power-off"></i>
               </a></li>
-          <?php else: ?>
-            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:void(0)" id="login_now">Login Customer</a>
+          <?php else : ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Login
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a<li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:void(0)" id="login_now" style="color: black;"> Customer</a>
+                <a class="nav-item"><a class="nav-link js-scroll-trigger" href="admin/login.php" style="color: black;"> Administrator</a>
+              </div>
+            </li>
+            </a>
             </li>
           <?php endif; ?>
-          <li class="nav-item"><a class="nav-link js-scroll-trigger" href="admin/login.php">Login Administrator</a></li>
+          <li></a></li>
         </ul>
       </div>
     </div>
@@ -87,8 +95,7 @@ foreach ($query as $key => $value) {
         <div class="modal-body">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id='submit'
-            onclick="$('#uni_modal form').submit()">Save</button>
+          <button type="button" class="btn btn-primary" id='submit' onclick="$('#uni_modal form').submit()">Save</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
         </div>
       </div>

@@ -15,7 +15,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Our Contact</h5>
+        <h5><b>Our Contact</b></h5>
         <ul>
           <li><a href="http://wa.me/6282233254044">WhatsApp</a></li>
           <li><a href="https://fahmialhafidza@gmail.com">Email</a></li>
@@ -23,7 +23,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Social Media </h5>
+        <h5><b>Social Media</b></h5>
         <ul>
           <li><a href="https://www.linkedin.com/in/dzachmid/">Linkedin</a></li>
           <li><a href="https://www.instagram.com/fahmialhafidz._/">Instagram</a></li>
@@ -40,16 +40,16 @@
   $('.datepicker').datepicker({
     format: "yyyy-mm-dd"
   })
-  window.start_load = function () {
+  window.start_load = function() {
     $('body').prepend('<di id="preloader2"></di>')
   }
-  window.end_load = function () {
-    $('#preloader2').fadeOut('fast', function () {
+  window.end_load = function() {
+    $('#preloader2').fadeOut('fast', function() {
       $(this).remove();
     })
   }
 
-  window.uni_modal = function ($title = '', $url = '') {
+  window.uni_modal = function($title = '', $url = '') {
     start_load()
     $.ajax({
       url: $url,
@@ -57,7 +57,7 @@
         console.log()
         alert("An error occured")
       },
-      success: function (resp) {
+      success: function(resp) {
         if (resp) {
           $('#uni_modal .modal-title').html($title)
           $('#uni_modal .modal-body').html(resp)
@@ -67,7 +67,7 @@
       }
     })
   }
-  window.uni_modal_right = function ($title = '', $url = '') {
+  window.uni_modal_right = function($title = '', $url = '') {
     start_load()
     $.ajax({
       url: $url,
@@ -75,7 +75,7 @@
         console.log()
         alert("An error occured")
       },
-      success: function (resp) {
+      success: function(resp) {
         if (resp) {
           $('#uni_modal_right .modal-title').html($title)
           $('#uni_modal_right .modal-body').html(resp)
@@ -85,7 +85,7 @@
       }
     })
   }
-  window.alert_toast = function ($msg = 'TEST', $bg = 'success') {
+  window.alert_toast = function($msg = 'TEST', $bg = 'success') {
     $('#alert_toast').removeClass('bg-success')
     $('#alert_toast').removeClass('bg-danger')
     $('#alert_toast').removeClass('bg-info')
@@ -100,12 +100,14 @@
     if ($bg == 'warning')
       $('#alert_toast').addClass('bg-warning')
     $('#alert_toast .toast-body').html($msg)
-    $('#alert_toast').toast({ delay: 3000 }).toast('show');
+    $('#alert_toast').toast({
+      delay: 3000
+    }).toast('show');
   }
-  window.load_cart = function () {
+  window.load_cart = function() {
     $.ajax({
       url: 'admin/ajax.php?action=get_cart_count',
-      success: function (resp) {
+      success: function(resp) {
         if (resp > -1) {
           resp = resp > 0 ? resp : 0;
           $('.item_count').html(resp)
@@ -113,10 +115,10 @@
       }
     })
   }
-  $('#login_now').click(function () {
+  $('#login_now').click(function() {
     uni_modal("LOGIN", 'login.php')
   })
-  $(document).ready(function () {
+  $(document).ready(function() {
     load_cart()
   })
 </script>

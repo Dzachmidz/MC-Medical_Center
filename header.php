@@ -3,7 +3,7 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>MC - Medical Center</title>
-<link rel="icon" type="image/x-icon" href="./assets/img/logo.webp">
+<link rel="icon" type="image/x-icon" href="./assets/img/logo.jpeg">
 
 <!-- Favicon-->
 
