@@ -28,21 +28,20 @@
 				if (isset($_SESSION['login_user_id'])) {
 					$data = "where c.user_id = '" . $_SESSION['login_user_id'] . "' ";
 				} else {
-					$ip = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+					$ip = (isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']));
 					$data = "where c.client_ip = '" . $ip . "' ";
 				}
 				$total = 0;
 				$get = $conn->query("SELECT *,c.id as cid FROM cart c inner join product_list p on p.id = c.product_id " . $data);
-				while ($row = $get->fetch_assoc()):
+				while ($row = $get->fetch_assoc()) :
 					$total += ($row['qty'] * $row['price']);
-					?>
+				?>
 
 					<div class="card">
 						<div class="card-body">
 							<div class="row">
 								<div class="col-md-4" style="text-align: -webkit-center">
-									<a href="javascript:void(0)" class="rem_cart btn btn-sm btn-outline-danger"
-										data-id="<?php echo $row['cid'] ?>"><i class="fa fa-trash"></i></a>
+									<a href="javascript:void(0)" class="rem_cart btn btn-sm btn-outline-danger" data-id="<?php echo $row['cid'] ?>"><i class="fa fa-trash"></i></a>
 									<img src="assets/img/<?php echo $row['img_path'] ?>" alt="">
 								</div>
 								<div class="col-md-4">
@@ -60,15 +59,11 @@
 									<p><small>Quantity :</small></p>
 									<div class="input-group mb-3">
 										<div class="input-group-prepend">
-											<button class="btn btn-outline-secondary qty-minus" type="button"
-												data-id="<?php echo $row['cid'] ?>"><span class="fa fa-minus"></button>
+											<button class="btn btn-outline-secondary qty-minus" type="button" data-id="<?php echo $row['cid'] ?>"><span class="fa fa-minus"></button>
 										</div>
-										<input type="number" readonly value="<?php echo $row['qty'] ?>" min=1
-											class="form-control text-center" name="qty">
+										<input type="number" readonly value="<?php echo $row['qty'] ?>" min=1 class="form-control text-center" name="qty">
 										<div class="input-group-prepend">
-											<button class="btn btn-outline-secondary qty-plus" type="button" id=""
-												data-id="<?php echo $row['cid'] ?>"><span
-													class="fa fa-plus"></span></button>
+											<button class="btn btn-outline-secondary qty-plus" type="button" id="" data-id="<?php echo $row['cid'] ?>"><span class="fa fa-plus"></span></button>
 										</div>
 									</div>
 								</div>
@@ -90,7 +85,7 @@
 					<div class="card">
 						<div class="card-body">
 							<p>
-								<large>Total Orders</large>
+								<large><b>Total Orders</b></large>
 							</p>
 							<hr>
 							<p class="text-right"><b>
@@ -132,11 +127,10 @@
 	}
 </style>
 <script>
-
-	$('.view_prod').click(function () {
+	$('.view_prod').click(function() {
 		uni_modal_right('Product', 'view_prod.php?id=' + $(this).attr('data-id'))
 	})
-	$('.qty-minus').click(function () {
+	$('.qty-minus').click(function() {
 		var qty = $(this).parent().siblings('input[name="qty"]').val();
 		update_qty(parseInt(qty) - 1, $(this).attr('data-id'))
 		if (qty == 1) {
@@ -145,31 +139,62 @@
 			$(this).parent().siblings('input[name="qty"]').val(parseInt(qty) - 1);
 		}
 	})
-	$('.qty-plus').click(function () {
+	$('.qty-plus').click(function() {
 		var qty = $(this).parent().siblings('input[name="qty"]').val();
 		$(this).parent().siblings('input[name="qty"]').val(parseInt(qty) + 1);
 		update_qty(parseInt(qty) + 1, $(this).attr('data-id'))
 	})
+
+	$(document).on('click', '.rem_cart', function() {
+		var id = $(this).data('id');
+		var thisButton = $(this);
+		if (confirm('Apakah Anda yakin ingin menghapus produk ini dari keranjang?')) {
+			$.ajax({
+				url: 'admin/ajax.php?action=delete_cart_qty',
+				method: 'POST',
+				data: {
+					id: id
+				},
+				success: function(resp) {
+					if (resp == 1) {
+						thisButton.closest('.card').remove();
+						load_cart();
+					}
+				}
+			});
+		}
+	});
+
 	function update_qty(qty, id) {
-		start_load()
+		start_load();
 		$.ajax({
 			url: 'admin/ajax.php?action=update_cart_qty',
 			method: "POST",
-			data: { id: id, qty },
-			success: function (resp) {
+			data: {
+				id: id,
+				qty
+			},
+			success: function(resp) {
 				if (resp == 1) {
-					load_cart()
-					end_load()
+					load_cart();
+					updateTotal();
+					end_load();
 				}
 			}
-		})
-
+		});
 	}
-	$('#checkout').click(function () {
-		if ('<?php echo isset($_SESSION['login_user_id']) ?>' == 1) {
-			location.replace("index.php?page=checkout")
-		} else {
-			uni_modal("Checkout", "login.php?page=checkout")
-		}
-	})
+
+	$('#checkout').click(function() {
+    var cartCount = parseInt($('.item_count').text());
+    if ('<?php echo isset($_SESSION['login_user_id']) ?>' == 1) {
+        if (cartCount > 0) {
+            location.replace("index.php?page=checkout");
+        } else {
+            location.replace("index.php?page=product");
+        }
+    } else {
+        uni_modal("Checkout", "login.php?page=checkout");
+    }
+})
+
 </script>

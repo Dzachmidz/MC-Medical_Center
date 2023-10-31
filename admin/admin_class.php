@@ -35,7 +35,7 @@ Class Action {
 				if($key != 'passwors' && !is_numeric($key))
 					$_SESSION['login_'.$key] = $value;
 			}
-			$ip = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+			$ip = (isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']));
 			$this->db->query("UPDATE cart set user_id = '".$_SESSION['login_user_id']."' where client_ip ='$ip' ");
 				return 1;
 		}else{
@@ -182,7 +182,7 @@ Class Action {
 		if(isset($_SESSION['login_user_id'])){
 			$data .= ", user_id = '".$_SESSION['login_user_id']."' ";	
 		}else{
-			$ip = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+			$ip = (isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']));
 			$data .= ", client_ip = '".$ip."' ";	
 
 		}
@@ -196,7 +196,7 @@ Class Action {
 			$where =" where user_id = '".$_SESSION['login_user_id']."'  ";
 		}
 		else{
-			$ip = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+			$ip = (isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']));
 			$where =" where client_ip = '$ip'  ";
 		}
 		$get = $this->db->query("SELECT sum(qty) as cart FROM cart ".$where);
@@ -214,7 +214,17 @@ Class Action {
 		if($save)
 		return 1;	
 	}
-
+	
+	function delete_cart_qty() {
+		extract($_POST);
+		$delete = $this->db->query("DELETE FROM cart where id = " . $id);
+		if ($delete) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	
 	function save_order(){
 		extract($_POST);
 		$data = " name = '".$first_name." ".$last_name."' ";

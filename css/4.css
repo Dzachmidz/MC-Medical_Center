@@ -5846,7 +5846,7 @@ a.close.disabled {
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 0.3rem;
+  border-radius: 1rem;
   outline: 0;
 }
 
@@ -7782,7 +7782,7 @@ button.bg-dark:focus {
 }
 
 .fixed-top {
-  position: fixed;
+  position: flex;
   top: 0;
   right: 0;
   left: 0;
@@ -10736,32 +10736,32 @@ div#menu-field .menu-item-details {
   width: 27vw;
   top: 0px;
   margin: unset;
-  right: -27vw;
-  -webkit-transition: right 0.4s ease-out !important;
-  -moz-transition: right 0.4s ease-out !important;
-  -o-transition: right 0.4s ease-out !important;
-  transition: right 0.4s ease-out !important;
+  left: -27vw;
+  -webkit-transition: left 0.4s ease-out !important;
+  -moz-transition: left 0.4s ease-out !important;
+  -o-transition: left 0.4s ease-out !important;
+  transition: left 0.4s ease-out !important;
 }
 .modal.show .modal-dialog.modal-full-height.modal-md {
   left: 0;
-  -webkit-transition: right 0.4s ease-out !important;
-  -moz-transition: right 0.4s ease-out !important;
-  -o-transition: right 0.4s ease-out !important;
-  transition: right 0.4s ease-out !important;
+  -webkit-transition: left 0.4s ease-out !important;
+  -moz-transition: left 0.4s ease-out !important;
+  -o-transition: left 0.4s ease-out !important;
+  transition: left 0.4s ease-out !important;
 }
 .modal .modal-dialog.modal-full-height.modal-md {
-  right: -27vw;
+  left: -27vw;
 }
 
 .modal-dialog.modal-full-height.modal-md .modal-content {
   height: 100vh;
 }
 .modal.right.fade .modal-dialog {
-  right: -27vw;
-  -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
-  -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
-  -o-transition: opacity 0.3s linear, right 0.3s ease-out;
-  transition: opacity 0.3s linear, right 0.3s ease-out;
+  left: -27vw;
+  -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+  -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+  -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+  transition: opacity 0.3s linear, left 0.3s ease-out;
 }
 @media only screen and (max-width: 600px) {
   .modal-dialog {

@@ -23,11 +23,13 @@
                                 <?php echo $row['price'] ?>
                             </h6>
                             <div class="text-center">
-                                <button class="btn btn-sm btn-outline-primary view_prod btn-block" data-id=<?php echo $row['id'] ?>><i class="fa fa-eye"></i> Lihat</button>
-
+                                <?php if (isset($_SESSION['login_user_id'])) : ?>
+                                    <button class="btn btn-sm btn-outline-primary view_prod btn-block" data-id=<?php echo $row['id'] ?>><i class="fa fa-eye"></i> Lihat</button>
+                                <?php else : ?>
+                                    <button class="btn btn-sm btn-outline-primary btn-block" onclick="alert('Anda harus login terlebih dahulu untuk melihat produk.')"><i class="fa fa-eye"></i> Lihat</button>
+                                <?php endif; ?>
                             </div>
                         </div>
-
                     </div>
                 </div>
             <?php endwhile; ?>

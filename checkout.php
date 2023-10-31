@@ -38,6 +38,7 @@
 
                     <div class="text-center">
                         <button class="btn btn-block btn-outline-primary">Place Order</button>
+                        <a href="index.php?page=receipt" target="_blank">print receipt</a>
                     </div>
                 </form>
             </div>

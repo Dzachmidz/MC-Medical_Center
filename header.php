@@ -16,8 +16,14 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="admin/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
-<link href="./css/2.css" rel="stylesheet" />
+<link href="./css/4.css" rel="stylesheet" />
 
 
 <script src="admin/assets/vendor/jquery/jquery.min.js"></script>
 <script src="admin/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+ <!-- jsPDF -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+ <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+ <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script> 
+ <script type="text/javascript"></script>
